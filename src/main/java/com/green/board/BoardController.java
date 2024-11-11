@@ -1,10 +1,25 @@
 package com.green.board;
 
-public class BoardController {
+import com.green.board.model.BoardInsRequest;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
+
+
     /*
-    요청(request)을 받고 응답처리하는 객체
+
+    Controller의 역할: 요청(request)을 받고, 응답(Response)처리하는 객체
     로직 처리는 하지 않는다.
     로직 담당은 Service
+
+    ANnotation(애노테이션)
+    @COntroller - 응답을 html (데이터로 만든 화면을 응답)
+    @RestController - 응답을 json (데이터만 응답)
+
+    @RequestMapping - url과 클래스 아래에 있는 Controller or Method 맵핑(연결)
+                      class RequestMappinf 전체 메소드 주소가 맵핑
 
     요청과 응답은 header, body로 이루어져 있음.
     header에는 목적지(url), 방식, 인코딩 등등
@@ -77,5 +92,21 @@ public class BoardController {
 
        (delete) /board - 글 삭제 (Path Variable or Query String으로 pk값 전달)
 
+
      */
+
+
+@RestController
+@RequestMapping("/board")
+public class BoardController {
+
+    //insert(Create)
+    @PostMapping //(post) / board 요청이 오면 이 메소드가 응답 담당
+    //@PostMapping("/board"): @RequestMapping("/board") 이 코드가 없었다면 URL을 작성해줘야 함
+    //@RequstBody는 요청이 올때 데이터가 JSON형태로 오니까 거기에 맞춰서 데이터를 받자.
+    public int insBoard(BoardInsRequest p) {
+        System.out.println(p);
+        return 1;
+    }
+
 }
