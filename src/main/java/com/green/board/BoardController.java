@@ -1,13 +1,12 @@
 package com.green.board;
 
-import com.green.board.model.BoardInsRequest;
-import com.green.board.model.BoardSelOneRes;
-import com.green.board.model.BoardSelRes;
+import com.green.board.model.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 
 
@@ -18,8 +17,8 @@ import java.util.List;
     로직 처리는 하지 않는다.
     로직 담당은 Service
 
-    ANnotation(애노테이션)
-    @COntroller - 응답을 html (데이터로 만든 화면을 응답)
+    Annotation(애노테이션)
+    @Controller - 응답을 html (데이터로 만든 화면을 응답)
     @RestController - 응답을 json (데이터만 응답)
 
     @RequestMapping - url과 클래스 아래에 있는 Controller or Method 맵핑(연결)
@@ -134,9 +133,20 @@ public class BoardController {
         System.out.println(p);
         return service.insBoard(p);
     }
+
+//    @PostMapping
+//    public String stringBoard(@RequestBody BoardInsRequest p) {
+//        System.out.println(p);
+//        return "";
+//    }
+//    PostMapping이 2개고 향하는 주소값이 하나면 컴퓨터가 엎어짐...
+
+
+
+
     // 객체 > JSON 바꾸는 직렬화 작업
     @GetMapping
-    public List<BoardSelRes> selBoardList (){
+    public List<BoardSelRes> selBoardList(){
         return service.selBoardList();
     }
     @GetMapping("{boardId}")
@@ -144,4 +154,15 @@ public class BoardController {
         return service.selBoardOne(boardId);
     }
 
+    @PutMapping
+    public int updBoard(@RequestBody BoardUpdReq p){
+        System.out.println(p);
+        return service.updBoard(p);
+    }
+
+    @DeleteMapping
+    public int delBoard( @ModelAttribute BoardDelReq p){
+        System.out.println(p);
+        return service.delBoard(p);
+    }
 }

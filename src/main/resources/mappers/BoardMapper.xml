@@ -33,7 +33,42 @@ html은 Hyper Text Markup Language 둘 다 마크업 언어이다.
     <select id="selBoardOne">
     SELECT board_id As boardId, title, contents, writer, created_at As createdAt
     From board
-    WHERE board_id = #{board_id}
+    WHERE board_id = #{board_id} <!-- 안에 뭘 적어도 상관 X -->
     </select>
+
+    <update id="updBoard">
+
+        update board
+        <set>
+            <if test=" title != null and title != '' ">
+                title = #{title}
+
+            </if>
+            <if test=" contents != null and contents != '' ">
+                , contents = #{contents}
+
+            </if>
+            <if test=" writer != null and writer != '' ">
+                , writer = #{writer}
+            </if>
+        </set>
+        WHERE board_id = #{boardId}
+    </update>
+
+
+    <delete id="delBoard">
+
+        Delete from board
+        WHERE board_id = #{boardId}
+        And writer = #{writer}
+
+
+    </delete>
+
+
+
+
+
+
 
 </mapper>
